@@ -1,0 +1,15 @@
+{
+  "name": "firstTest",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-parser": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "multer": "latest",
+    "mysql": "latest",
+    "static-favicon": "~1.0.0",
+    "ueditor": "^1.2.3"
+  }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="Description" content="记录作者学习工作中遇到的技术问题及解决方案">
+    <meta name="Keywords" content="徐莫庭笔记博客,博客,笔记,BLOG">
+	<title>文章列表</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <style type="text/css">
+        .fixed{
+            position: fixed;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background-color: rgba(0,0,0,.1);
+        }
+    	.list{
+    		width: 1000px;
+    		margin: 100px auto;
+    	}
+    	.list .list-item{
+    		width: 100%;
+    		height: 210px;
+    		border: 1px dotted #ccc;
+    		margin: 10px 0;
+    	}
+    	.list-item .img{
+    		float: left;
+    		width: 197px;
+    		height: 200px;
+    		margin: 5px;
+    		overflow: hidden;
+    	}
+    	.list-item .img>img{
+    		width: 100%;
+    		height: 100%;
+    	}
+    	.list-item .container{
+    		float: left;
+    		width: 790px;
+    		height: 210px;
+    	}
+    	.list-item .container h4.title{
+    		width: 100%;
+    		height: 50px;
+    		line-height: 50px;
+    		text-align: center;
+    		font-size: 24px;
+    		font-weight: bold;
+    	}
+    	.list-item .container .author{
+    		width: 100%;
+    		height: 30px;
+    		line-height: 30px;
+    		text-align: center;
+    		font-size: 14px;
+    	}
+    	.list-item .container .content{
+    		width: 100%;
+    		height: 100px;
+    		text-indent: 2em;
+    		padding: 5px 0;
+    		overflow: hidden;
+    	}
+    	.Page{
+    		width: 1000px;
+    		height: 50px;
+    		margin: 0 auto;
+    	}
+    	.page .page-item{
+    		float: left;
+    		width: 40px;
+    		height: 40px;
+    		line-height:40px;
+    		text-align: center;
+    		border: 1px solid #ddd;
+    		margin: 5px;
+    	}
+    </style>
+</head>
+<body>
+<%- include header.ejs %>
+<div class="fixed"></div>
+<ul class="list">
+<% for(var i in data){ %>
+	<li class="list-item">
+		<a href="/article/<%- data[i]['id'] %>.html">
+			<div class="img img-rounded"><img src="<%- data[i]['img'] %>"></div>
+			<div class="container">
+				<h4 class="title"><%- data[i]['title'] %></h4>
+				<div class="author"><%- data[i]['author'] %></div>
+				<div class="content"><%- data[i]['content'] %></div>
+			</div>
+		</a>
+	</li>
+<% } %>
+</ul>
+<nav class="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <% for(var i = 0; i<pages; i++){ %>
+        <li>
+            <a href="/article/list-<%- Number(i)+1 %>.html"><%- Number(i)+1 %></a>
+        </li>
+        <% } %>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+    </ul>
+</nav>
+
+<%- include footer.ejs %>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+    for(let i=0; i<$("li").length(); i++){
+        $(".content").eq(i).html($(".content").eq(i).text());
+    }
+</script>
+</body>
+</html>

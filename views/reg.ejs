@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="Description" content="记录作者学习工作中遇到的技术问题及解决方案">
+	<meta name="Keywords" content="徐莫庭笔记博客,博客,笔记,BLOG">
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+	<style type="text/css">
+		body,html{height: 100%; overflow: hidden;}
+		.wrap{
+			position: relative;
+			width: 100%;
+			height: 100%;
+			background: url('/img/bgReg.png');
+			background-size: 100% 100%;
+		}
+		.wrap .container-wrap{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 400px;
+			height: 740px;
+			margin-left: -200px;
+			margin-top: -350px;
+			background: rgba(250,250,250,.4);
+		}
+		.container-wrap h1{
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			text-indent: 20px;
+			font-size: 24px;
+			color: #000;
+			/*color: transparent;
+			-webkit-text-stroke: 1px #000; */
+		}
+		.container{
+			width: 100%;
+			margin-top: 30px;
+		}
+		.container label{
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			font-size: 14px;
+		}
+		.container label.level{
+			padding-left: 78px;
+		}
+		.container label.levelt{
+			padding-left: 50px;
+		}
+		.container label.leveltr{
+			padding-left: 35px;
+		}
+		.container input,select{
+			width: 200px;
+			height: 30px;
+			line-height: 30px;
+			border-radius: 5px;
+			outline: none;
+			font-size: 14px;
+			text-indent: 1em;
+			border: none;
+		}
+		.container .btn{
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			margin-top: 30px;
+		}
+		.container .btn .submit{
+			background: #097B09;
+			cursor: pointer;
+			letter-spacing: 12px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="container-wrap">
+		<h1>注册</h1>
+		<div class="container">
+			<label for="" class="level">账号：<input class="user" type="text" id="user"></label>
+			<label for="" class="level">密码：<input class="pwd" type="password" id="pwd"></label>
+			<label for="" class="levelt">确认密码：<input class="pwdt" type="password" id="pwdt"></label>
+			<label for="" class="level">姓氏：<input type="text" class="surname" id="surname" /></label>
+			<label for="" class="level">名字：<input type="text" class="personalname" id="personalname" /></label>
+			<label for="" class="level">性别：
+			<select class="sex">
+					<option value="0">男</option>
+					<option value="1">女</option>
+				</select>
+			</label>
+			<label for="" class="levelt">身份证号：<input type="text" class="idCard" id="idCard" /></label>
+			<label for="" class="level">手机：<input type="text" class="phone" id="phone" /></label>
+			<label for="" class="level">邮箱：<input type="text" class="mail" id="mail" /></label>
+			<label for="" class="level">地址：<input type="text" class="address" id="address" /></label>
+			<label for="" class="leveltr">是否管理员：
+				<select class="isAdmin">
+					<option value="0">否</option>
+					<option value="1">是</option>
+				</select>
+			</label>
+			<div class="btn">
+				<input class="submit" type="button" value="注册">
+				<a class="back" href="javascript:;">返回</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+	$(".submit").click(function(){
+		$.ajax({
+			url:"/reg",
+			type:"post",
+			datatype:"json",
+			data:{
+				name: $(".user").val(),
+				pwd: $(".pwd").val(),
+				admin: $(".isAdmin").val(),
+				surname: $(".surname").val(),
+				personalname: $(".personalname").val(),
+				sex: $(".sex").val(),
+				idCard: $(".idCard").val(),
+				phone: $(".phone").val(),
+				mail: $(".mail").val(),
+				address: $(".address").val()
+			},
+			success:function(data){
+				alert(data['successed']);
+				window.location.reload();
+			},
+			error:function(){
+				alert('注册失败');
+			}
+		})
+	});
+	//返回
+	$(".back").click(function(){
+		window.history.back(-1); 
+	});
+	// 表单验证
+	$(".container-wrap").validate({
+		rules:{
+			user:{
+				required:true,
+				minlength:6,
+				maxlength:16
+			},
+			pwd:{
+				required:true,
+				minlength:6,
+				maxlength:16
+			},
+			pwdt:{
+				required:true,
+				minlength:6,
+				maxlength:16,
+				equalTo: "#pwd"
+			},
+			surname:{
+				required: true
+			},
+			personalname:{
+				required: true
+			},
+			idCard:{
+				required: true
+			},
+			phone:{
+				required: true
+			},
+			mail:{
+				required: true
+			},
+			address:{
+				required: true
+			},
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="记录作者学习工作中遇到的技术问题及解决方案">
+    <meta name="Keywords" content="徐莫庭笔记博客,博客,笔记,BLOG">
+    <title>徐莫庭笔记博客||BLOG</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/canvas.js"></script>
+</head>
+<body>
+   <%- include header.ejs %>
+   <main>
+    <div id="banner" class="banner">
+      <canvas id="can" class="hidden-xs" height="600"></canvas>
+      <div class="content">
+        <div class="logo hidden-xs"></div>
+        <div class="text">
+          <p>WEB前端笔记||BLOG</p>
+          <p>知识改变命运，实践方出真知。</p>
+        </div>
+      </div>
+      <a href="javascript:;">
+        <span class="unu"></span>
+        <span class="doi"></span>
+      </a>
+    </div>
+    <div class="article-wrap">
+      <h4><i class="title">文章列表</i><i>Article List</i></h4>
+      <ul class="article">
+       <% for(var i in data){ %>
+          <li class="article-item col-md-4 col-sm-6 col-xs-12">
+            <div class="content">
+              <a href="/article/<%= data[i]['id'] %>.html">
+                <div class="img">
+                  <img src="<%= data[i]['img']%>" alt="pic">
+                  <!-- <mark></mark> -->
+                </div>
+                <p class="title"><span class="glyphicon glyphicon-tag"></span><%= data[i]['title']%></p>
+                <p class="author"><span class="glyphicon glyphicon-user"></span><%= data[i]['author']%></p>
+              </a>
+            </div>
+          </li>
+       <% } %>
+      </ul>
+      <div class="more">
+        <a href="/article/list-1.html" target="_blank">more</a>
+      </div>
+    </div>
+   </main>
+   <%- include footer.ejs %>
+</body>
+</html>
+
+  

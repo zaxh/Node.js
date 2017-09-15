@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>header</title>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/header.css">
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target="#example-navbar-collapse">
+              <span class="sr-only">切换导航</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="javascript:;"><img src="/img/index/logo.png"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="example-navbar-collapse">
+          <ul class="nav navbar-nav">
+             <% for(var i in firNav){ %>
+             <li class="nav-item">
+              <a href="<%- firNav[i]['url'] %>"><%- firNav[i]['title'] %></a>
+               <ul class="nav-item-list dropdown-menu">
+                 <% for(var j in firNav[i]['child']){ %>
+                 <li>
+                  <a href="<%- firNav[i]['child'][j]['url'] %>"><%- firNav[i]['child'][j]['title'] %></a></li>
+                 <% } %>
+               </ul>
+             </li>
+            <% } %>
+            <li class="nav-item">
+              <a href="/admin">进入后台</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+           <% if(locals.login) { %>
+           <% if(locals.admin){ %>
+              管理员 <%- locals.username %>
+           <% } %>
+           <li class="status"><span class="glyphicon glyphicon-log-out"></span><a href="/logout">退出</a></li>
+           <% }else{ %>
+           <li class="status"><span class="glyphicon glyphicon-log-in"></span><a href="/login">登录</a></li>
+           <li class="status"><span class="glyphicon glyphicon-user"></span><a href="/reg">注册</a></li>
+          <% } %>
+          </ul>
+      </div>
+    </div>
+</nav>
+<script type="text/javascript">
+  $(function(){
+    $(".nav-item").each(function(){
+      $(this).hover(function(){
+        $(".nav-item-list").eq($(this).index()).css({
+          '-webkit-transform': 'scale(1)',
+          'transform': 'scale(1)'
+        });
+      },function(){
+        $(".nav-item-list").eq($(this).index()).css({
+          '-webkit-transform': 'scale(0)',
+          'transform': 'scale(0)'
+        });
+      });
+    });
+    window.onscroll= function(){
+      var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      var _width = document.body.offsetWidth;
+      if (winScroll>0) {
+        $(".navbar-inverse").css({
+          "background-color": "rgba(0,0,0,1)"
+        });
+        $("header .container-wrap .container h1>img").css({
+          "height": "62px"
+        });
+      }else if(winScroll<=0  && _width>=768){
+        $(".navbar-inverse").css({
+          "background-color": "rgba(0,0,0,0)"
+        });
+        $("header .container-wrap .container h1>img").css({
+          "height": "73px"
+        });
+      }
+    }
+    
+  });
+</script>
+</body>
+</html>
